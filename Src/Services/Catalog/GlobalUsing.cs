@@ -1,0 +1,10 @@
+global using BuildingBlocks.Behaviors;
+global using BuildingBlocks.CQRS;
+global using Carter;
+global using Catalog.API.Models;
+global using Concordia;
+global using Concordia.MediatR;
+global using FluentValidation;
+global using Mapster;
+global using Marten;
+global using Scalar.AspNetCore;

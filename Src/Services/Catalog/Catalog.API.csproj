@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Features\DeleteProduct\" />
+    <Folder Include="Features\GetProductById\" />
+    <Folder Include="Features\GetProductsByCategory\" />
+    <Folder Include="Features\GetProducts\" />
+    <Folder Include="Features\UpdateProduct\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Carter" Version="10.0.0" />
+    <PackageReference Include="Concordia.Core" Version="2.3.3" />
+    <PackageReference Include="Concordia.MediatR" Version="2.3.3" />
+    <PackageReference Include="Marten" Version="8.21.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.12.40" />
+    <PackageReference Include="Scalar.AspNetCore.Microsoft" Version="2.12.40" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
+  </ItemGroup>
+</Project>

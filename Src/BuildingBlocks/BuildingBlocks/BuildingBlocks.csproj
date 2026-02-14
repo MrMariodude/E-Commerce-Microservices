@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Concordia.Core" Version="2.3.3" />
+    <PackageReference Include="Concordia.MediatR" Version="2.3.3" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="Mapster" Version="10.0.0-pre01" />
+    <PackageReference Include="Mapster.Core" Version="10.0.0-pre01" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Abstractions" Version="2.3.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Behaviors\" />
+    <Folder Include="CQRS\" />
+    <Folder Include="Exceptions\Handlers\" />
+  </ItemGroup>
+</Project>
