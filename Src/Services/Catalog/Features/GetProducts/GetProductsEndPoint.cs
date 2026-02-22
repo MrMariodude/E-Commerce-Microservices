@@ -1,6 +1,6 @@
 namespace Catalog.API.Features.GetProducts;
 
-public record GetProductsResponse(
+public record GetProductsItemResponse(
     Guid ID,
     string Name,
     List<string> Categories,
@@ -9,17 +9,30 @@ public record GetProductsResponse(
     decimal Price
 );
 
+public record GetProductsResponse(
+    IReadOnlyList<GetProductsItemResponse> Items,
+    long Count,
+    bool IsFirst,
+    bool IsLast,
+    long PageNumber,
+    long PageSize,
+    long TotalItemCount,
+    long PageCount
+);
+
 public class GetProductsEndPoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet(
                 "/products",
-                async (ISender sender) =>
+                async (ISender sender, int pageNumber = 1, int pageSize = 10) =>
                 {
-                    GetProductsResult result = await sender.Send(new GetProductsQuery());
-                    var resultDto = result.Products.Adapt<List<GetProductsResponse>>();
-                    return Results.Ok(resultDto);
+                    GetProductsResult result = await sender.Send(
+                        new GetProductsQuery(pageNumber, pageSize)
+                    );
+                    GetProductsResponse response = result.Adapt<GetProductsResponse>();
+                    return Results.Ok(response);
                 }
             )
             .WithName("GetProducts")
