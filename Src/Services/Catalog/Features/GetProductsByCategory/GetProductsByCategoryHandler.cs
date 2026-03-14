@@ -20,7 +20,7 @@ internal class GetProductsByCategoryHandler(IDocumentSession session)
         var result = await session
             .Query<Product>()
             .Where(product => product.Categories.Any(category => categories.Contains(category)))
-            .ToListAsync();
+            .ToListAsync(token: cancellationToken);
 
         return new GetProductsByCategoryResult(result);
     }

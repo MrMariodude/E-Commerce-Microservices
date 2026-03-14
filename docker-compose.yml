@@ -1,0 +1,56 @@
+services:
+  catalogpostgresdb:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: CatalogDb
+    restart: always
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_catalog:/var/lib/postgresql
+
+  catalogapi:
+    image: catalog-api
+    build:
+      context: .
+      dockerfile: Src/Services/Catalog/Dockerfile
+    depends_on:
+      - catalogpostgresdb
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Database: Host=catalogpostgresdb;Port=5432;Database=CatalogDb;User Id=postgres;Password=postgres;Include Error Detail=true
+    ports:
+      - "5000:8080"
+
+  basketpostgresdb:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: BasketDb
+    restart: always
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_basket:/var/lib/postgresql
+
+  basketapi:
+    image: basket-api
+    build:
+      context: .
+      dockerfile: Src/Services/Basket/Dockerfile
+    depends_on:
+      - basketpostgresdb
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Database: Host=basketpostgresdb;Port=5432;Database=BasketDb;User Id=postgres;Password=postgres;Include Error Detail=true
+    ports:
+      - "5001:8080"
+
+volumes:
+  postgres_catalog:
+  postgres_basket:

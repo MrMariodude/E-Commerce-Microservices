@@ -24,6 +24,11 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
         //! 2) detect the exact type of the exception and create the problem details
         (string Detail, string Title, int StatusCode) problem = exception switch
         {
+            BadHttpRequestException => (
+                exception.Message,
+                exception.GetType().Name,
+                StatusCodes.Status400BadRequest
+            ),
             InternalServerException => (
                 exception.Message,
                 exception.GetType().Name,
